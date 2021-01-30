@@ -3,7 +3,9 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 
-def exclude_columns_with_NaN(df, NaN_percentage):
+def exclude_columns_with_NaN(df,
+                             NaN_percentage,
+                             return_excluded_column_names=True):
     """ Убирает колонки в таблице данных, с большим количеством неопределенных
     ячеек.
 
@@ -12,6 +14,8 @@ def exclude_columns_with_NaN(df, NaN_percentage):
     NaN_percentage : int or float
         доля неопределенных ячеек (в %). При наличие такого количества неопреденных
         ячеек, колонка исключается из рассмотрения
+    return_excluded_column_names : bool defaut True
+        если стоит значение true, возвращет названия исключенных колонок таблицы
     
     Returns
     -------
@@ -28,14 +32,21 @@ def exclude_columns_with_NaN(df, NaN_percentage):
 
     df = df.drop(columns=column_names_to_exclude)
 
-    return df
+    if return_excluded_column_names:
+        return df, column_names_to_exclude
+    else:
+        return df
 
 
-def exclude_columns_with_only_value(df):
+
+def exclude_columns_with_only_value(df,
+                                    return_excluded_column_names=True):
     """ Убирает колонки в таблице данных, все ячейки которых имеют только 1 значение
 
     df : pandas.Dataframe
         таблица данных
+    return_excluded_column_names : bool defaut True
+        если стоит значение true, возвращет названия исключенных колонок таблицы
     
     Returns
     -------
@@ -51,7 +62,10 @@ def exclude_columns_with_only_value(df):
         
     df = df.drop(columns=column_names_to_exclude)
 
-    return df
+    if return_excluded_column_names:
+        return df, column_names_to_exclude
+    else:
+        return df
 
 
 
