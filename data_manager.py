@@ -24,21 +24,28 @@ def load_data(csv_file_name=EVRAZ_DATA):
     return pd.read_csv(file_path, sep=DEFAULT_SEP, decimal=DEFAULT_DECIMAL)
 
 
-def save_data(df, csv_file_name,  decimal=","):
+def save_data(df, file_name):
     """ сохраняет csv файл
 
     df : pandas.Dataframe
         таблица данных
-    csv_file_name : str
-        Название csv файла в который нужно сохранить df
+    file_name : str
+        Название csv или xlsx файла в который нужно сохранить df
     
     Returns
     -------
     """
-    if csv_file_name == EVRAZ_DATA:
-        raise ValueError(f"Имя csv_file_name={EVRAZ_DATA} запрещено")
 
+    file_path = os.path.join(SCRIPT_PATH, DATA_FOLDER_NAME, file_name)
 
-    file_path = os.path.join(SCRIPT_PATH, DATA_FOLDER_NAME, csv_file_name)
+    if file_name == EVRAZ_DATA:
+        raise ValueError(f"Name file_name={EVRAZ_DATA} constricted")
+    if os.path.exists(file_path):
+        os.remove(file_path)
 
-    return pd.to_csv(file_path, sep=DEFAULT_SEP, decimal=DEFAULT_DECIMAL)
+    if file_name[-3:]=="csv":
+        df.to_csv(file_path, sep=DEFAULT_SEP, decimal=DEFAULT_DECIMAL)
+    elif file_name[-3:]=="lsx":
+        df.to_excel(file_path)
+    else:
+        raise ValueError(f"file_name must consist .csv or .xlsx")
