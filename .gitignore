@@ -1,5 +1,4 @@
 .idea
 *.json
 __pycache__
-Melekhin/*.csv
 *.ipynb_checkpoints
