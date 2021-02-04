@@ -9,9 +9,9 @@ DEFAULT_DECIMAL = ","
 
 
 def load_data(csv_file_name=EVRAZ_DATA):
-    f""" загружает csv файл
+    """ загружает csv файл
 
-    csv_file_name : str defaut {EVRAZ_DATA}
+    csv_file_name : str defaut "evraz_data.csv"
         Название csv файла
     
     Returns
